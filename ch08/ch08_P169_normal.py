@@ -14,13 +14,15 @@ for i, pklfile in enumerate(pklist):
         class_1 = pickle.load(f)
         class_2 = pickle.load(f)
         labels = pickle.load(f)
+
+    model = knn.KnnClassifier(labels,vstack((class_1,class_2)))
+
     # load test data using Pickle
     with open(pklfile[:-4]+'_test.pkl', 'r') as f:
         class_1 = pickle.load(f)
         class_2 = pickle.load(f)
         labels = pickle.load(f)
 
-    model = knn.KnnClassifier(labels,vstack((class_1,class_2)))
     # test on the first point
     print model.classify(class_1[0])
 
