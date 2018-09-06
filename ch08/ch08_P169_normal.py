@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 import pickle
 from pylab import *
+
+#import sys
+#sys.path.append("../PCV")
+
 from PCV.classifiers import knn
 from PCV.tools import imtools
 

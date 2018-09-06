@@ -2,7 +2,16 @@
 from PIL import Image
 from pylab import *
 from scipy.ndimage import measurements
+from PCV.tools import imtools
+from svmutil import *
 
+def compute_feature(im):
+    """ Returns a feature vector for an
+    ocr image patch. """
+    # resize and remove border
+    norm_im = imtools.imresize(im,(30,30))
+    norm_im = norm_im[3:-3,3:-3]
+    return norm_im.flatten()
 
 def find_sudoku_edges(im, axis=0):
     """ 寻找对齐后数独图像的的单元边线 """
@@ -33,13 +42,17 @@ def find_sudoku_edges(im, axis=0):
     else:
         raise RuntimeError('Edges not detected.')
 
-imname = '../data/sudoku_images/sudoku_images/sudokus/sudoku18.jpg'
+imname = '../data/sudoku_images/sudokus/sudoku18.jpg'
+vername = '../data/sudoku_images/sudokus/sudoku18.sud'
 im = array(Image.open(imname).convert('L'))
+
+'''
 print im.shape
 figure()
 gray()
 imshow(im)
 axis('off')
+'''
 
 # find the cell edges
 # 寻找x方向的单元边线
@@ -47,6 +60,19 @@ x = find_sudoku_edges(im, axis=0)
 #寻找y方向的单元边线
 y = find_sudoku_edges(im, axis=1)
 
+# crop cells and classify
+crops = []
+for col in range(9):
+    for row in range(9):
+        crop = im[y[col]:y[col+1],x[row]:x[row+1]]
+        crops.append(compute_feature(crop))
+
+res = svm_predict(loadtxt(vername),map(list,crops),m)[0]
+res_im = array(res).reshape(9,9)
+print 'Result:'
+print res_im
+
+'''
 figure()
 gray()
 
@@ -66,14 +92,16 @@ for i, ch in enumerate(y2):
     #画散点图
     plot(x1, y1, 'b', linewidth=2)
 
-'''for i, ch in enumerate(x):
+for i, ch in enumerate(x):
     y1 = range(x[0], x[-1]+1, 1)
     x1 = ch*ones(len(x1))
     #画散点图
     plot(x1, y1, 'r', linewidth=2)
 
-plot(x, y, 'or', linewidth=2)'''
+plot(x, y, 'or', linewidth=2)
 
 imshow(im)
 axis('off')
 show()
+
+'''

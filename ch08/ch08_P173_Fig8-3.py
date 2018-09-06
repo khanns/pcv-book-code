@@ -10,7 +10,7 @@ imlist=['../data/gesture/train/A-uniform01.ppm','../data/gesture/train/B-uniform
 
 figure()
 for i, im in enumerate(imlist):
-    dsift.process_image_dsift(im,im[:-3]+'.dsift',90,40,True)
+    dsift.process_image_dsift(im,im[:-3]+'dsift',10, 5,True)
     l,d = sift.read_features_from_file(im[:-3]+'dsift')
     dirpath, filename=os.path.split(im)
     im = array(Image.open(im))

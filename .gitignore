@@ -1,3 +1,17 @@
+*.jpg
+*.pyc
+*.dsift
+*.ppm
+*.png
+*.pkl
+*.zip
+*.sud
+*.pgm
+.idea
+*.frame
+*.DS_Store
+data
+
 #################
 ## Eclipse
 #################

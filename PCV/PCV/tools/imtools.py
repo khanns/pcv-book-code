@@ -71,8 +71,8 @@ def plot_2D_boundary(plot_range,points,decisionfcn,labels,values=[0]):
     clist = ['b','r','g','k','m','y'] # colors for the classes
     
     # evaluate on a grid and plot contour of decision function
-    x = arange(plot_range[0],plot_range[1],.1)
-    y = arange(plot_range[2],plot_range[3],.1)
+    x = arange(plot_range[0],plot_range[1],.5)
+    y = arange(plot_range[2],plot_range[3],.5)
     xx,yy = meshgrid(x,y)
     xxx,yyy = xx.flatten(),yy.flatten() # lists of x,y in grid
     zz = array(decisionfcn(xxx,yyy)) 

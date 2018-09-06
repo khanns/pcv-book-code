@@ -29,10 +29,10 @@ def process_image_dsift(imagename,resultname,size=20,steps=10,force_orientation=
     savetxt('tmp.frame',frame.T,fmt='%03.3f')
     
     if force_orientation:
-        cmmd = str("D:\mltools\win32vlfeat\sift.exe "+imagename+" --output="+resultname+
+        cmmd = str("C:\Dropbox\mltools\win32vlfeat\sift.exe "+imagename+" --output="+resultname+
                     " --read-frames=tmp.frame --orientations")
     else:
-        cmmd = str("D:\mltools\win32vlfeat\sift.exe "+imagename+" --output="+resultname+
+        cmmd = str("C:\Dropbox\mltools\win32vlfeat\sift.exe "+imagename+" --output="+resultname+
                     " --read-frames=tmp.frame")
     os.system(cmmd)
     print 'processed', imagename, 'to', resultname

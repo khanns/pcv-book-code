@@ -35,24 +35,23 @@ def print_confusion(res,labels,classnames):
     print classnames
     print confuse
 
-filelist_train = get_imagelist('../data/gesture/train')
-filelist_test = get_imagelist('../data/gesture/test')
+filelist_train = get_imagelist('../data/hand_gesture/train')
+filelist_test = get_imagelist('../data/hand_gesture/test')
 imlist=filelist_train+filelist_test
 
 # process images at fixed size (50,50)
-for filename in imlist:
-    featfile = filename[:-3]+'dsift'
-    dsift.process_image_dsift(filename,featfile,10,5,resize=(50,50))
+#for filename in imlist:
+#    featfile = filename[:-3]+'dsift'
+#    dsift.process_image_dsift(filename,featfile,10,5,resize=(50,50))
 
 features,labels = read_gesture_features_labels('../data/gesture/train/')
 test_features,test_labels = read_gesture_features_labels('../data/gesture/test/')
 classnames = unique(labels)
 
 # test kNN
-k = 1
+k = 2
 knn_classifier = knn.KnnClassifier(labels,features)
-res = array([knn_classifier.classify(test_features[i],k) for i in
-range(len(test_labels))])
+res = array([knn_classifier.classify(test_features[i],k) for i in range(len(test_labels))])
 # accuracy
 acc = sum(1.0*(res==test_labels)) / len(test_labels)
 print 'Accuracy:', acc

@@ -1,6 +1,9 @@
 from numpy import * 
 
 
+"""
+chapter 8.2, bayes classifier
+"""
 class BayesClassifier(object):
     
     def __init__(self):
@@ -15,7 +18,8 @@ class BayesClassifier(object):
         """ Train on data (list of arrays n*dim). 
             Labels are optional, default is 0...n-1. """
         
-        if labels==None:
+        #if labels==None:
+        if size(labels) == 0:
             labels = range(len(data))
         self.labels = labels
         self.n = len(labels)
