@@ -107,7 +107,7 @@ def plot_matches(im1,im2,locs1,locs2,matchscores,show_below=True):
 	cols1 = im1.shape[1]
 	for i in range(len(matchscores)):
 		if matchscores[i] > 0:
-			plot([locs1[i,0], locs2[matchscores[i,0],0]+cols1], [locs1[i,1], locs2[matchscores[i,0],1]], 'c')
+			plot([locs1[i,0], locs2[int(matchscores[i,0]),0]+cols1], [locs1[i,1], locs2[int(matchscores[i,0]),1]], 'c')
 	axis('off')
 
 
